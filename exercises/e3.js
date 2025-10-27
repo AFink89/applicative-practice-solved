@@ -5,10 +5,10 @@ import { data } from "../data/data";
 // Return example: [1, 2, ... , N]
 
 export function getAllAverageTemperatures(data) {
-  // Your code goes here...
+  return data.planets.map(planet => planet.avgTemp);
 }
 
-
+console.log(getAllAverageTemperatures(data));
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-3"
