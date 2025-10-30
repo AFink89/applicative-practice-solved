@@ -8,12 +8,29 @@
  * The function MUST NOT use the find() method.
  */
 
+const people = [
+  { name: "Scobee", id: 1 },
+  { name: "Bri", id: 2 },
+  { name: "Carly", id: 3 },
+  { name: "John", id: 4 },
+  { name: "Bryce", id: 5 },
+  { name: "Dawn", id: 6 }
+];
 
 export function find(array, callback) {
-  // Your code goes here...
-  
-}
+  for (let element of array) {
+    if (callback(element)) {
+      return element;
+    }
+  }
+  return undefined;
+};
 
+const personName = find(people, person =>
+  person.name === "Scobee"
+)?.name;
+
+console.log(personName);
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-16"

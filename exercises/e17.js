@@ -9,15 +9,40 @@
  */
 
 export function minBy(array, cb) {
-  // Your code goes here...
+  if (!array || array.length === 0) return undefined;
 
+  let minElement = array[0];
+  for (let element of array) {
+    if (cb(element) < cb(minElement)) {
+      minElement = element;
+    }
+  }
+  return minElement;
 }
 
 export function maxBy(array, cb) {
-  // Your code goes here...
+  if (!array || array.length === 0) return undefined;
 
+  let maxElement = array[0];
+  for (let element of array) {
+    if (cb(element) > cb(maxElement)) {
+      maxElement = element;
+    }
+  }
+  return maxElement;
 }
 
+const people = [
+  { name: "jon", age: 29 },
+  { name: "peter", age: 30 },
+  { name: "andrey", age: 22 },
+];
+
+const youngestPerson = minBy(people, (person) => person.age);
+const oldestPerson = maxBy(people, (person) => person.age);
+
+console.log("Youngest person:", youngestPerson);
+console.log("Oldest person:", oldestPerson);
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-17"
