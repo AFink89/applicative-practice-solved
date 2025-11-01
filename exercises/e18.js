@@ -6,33 +6,22 @@
 import { data } from "../data/data.js";
 
 export function getGreatestDiscoveryYear(data) {
-  const discoveriesByYear = {};
-
-  for (let asteroid of data.asteroids) {
+  const discoveriesByYear = data.asteroids.reduce((acc, asteroid) => {
     const year = asteroid.discoveryYear;
-    discoveriesByYear[year] = (discoveriesByYear[year] || 0) + 1;
-  }
+    acc[year] = (acc[year] || 0) + 1;
+    return acc;
+  }, {});
 
   const yearCounts = Object.entries(discoveriesByYear).map(([year, count]) => ({
     year: Number(year),
     count,
   }));
 
-  function maxBy(array, cb) {
-    if (!array || array.length === 0) return undefined;
-    let maxElement = array[0];
-    for (let element of array) {
-      if (cb(element) > cb(maxElement)) {
-        maxElement = element;
-      }
-    }
-    return maxElement;
-  }
-
-  const greatest = maxBy(yearCounts, (item) => item.count);
+  const greatest = yearCounts.reduce((max, item) => {
+    return item.count > max.count ? item : max;
+  }, yearCounts[0]);
 
   return greatest.year;
-
 }
 
 console.log(getGreatestDiscoveryYear(data));

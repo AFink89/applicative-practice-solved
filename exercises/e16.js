@@ -17,19 +17,13 @@ const people = [
   { name: "Dawn", id: 6 }
 ];
 
-export function find(array, callback) {
-  for (let element of array) {
-    if (callback(element)) {
-      return element;
-    }
-  }
-  return undefined;
-};
+export function find(array, callback, index = 0) {
+  if (index >= array.length) return undefined;
+  if (callback(array[index])) return array[index];
+  return find(array, callback, index + 1);
+}
 
-const personName = find(people, person =>
-  person.name === "Scobee"
-)?.name;
-
+const personName = find(people, person => person.name === "Scobee")?.name;
 console.log(personName);
 
 // === TEST YOURSELF ===

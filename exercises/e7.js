@@ -10,7 +10,7 @@ export function getPlanetsNamesWithMoons(data) {
     .map(planet => planet.name);
 }
 
-console.log(getPlanetsNamesWithMoons);
+console.log(getPlanetsNamesWithMoons(data));
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-7"

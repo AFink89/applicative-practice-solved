@@ -8,28 +8,24 @@
  * * maxBy(): Return the element where the callback function on that element yields the highest value
  */
 
-export function minBy(array, cb) {
+export function minBy(array, cb, index = 1, minElement = array[0]) {
   if (!array || array.length === 0) return undefined;
+  if (index >= array.length) return minElement;
 
-  let minElement = array[0];
-  for (let element of array) {
-    if (cb(element) < cb(minElement)) {
-      minElement = element;
-    }
-  }
-  return minElement;
+  const current = array[index];
+  const newMin = cb(current) < cb(minElement) ? current : minElement;
+
+  return minBy(array, cb, index + 1, newMin);
 }
 
-export function maxBy(array, cb) {
+export function maxBy(array, cb, index = 1, maxElement = array[0]) {
   if (!array || array.length === 0) return undefined;
+  if (index >= array.length) return maxElement;
 
-  let maxElement = array[0];
-  for (let element of array) {
-    if (cb(element) > cb(maxElement)) {
-      maxElement = element;
-    }
-  }
-  return maxElement;
+  const current = array[index];
+  const newMax = cb(current) > cb(maxElement) ? current : maxElement;
+
+  return maxBy(array, cb, index + 1, newMax);
 }
 
 const people = [
@@ -38,8 +34,8 @@ const people = [
   { name: "andrey", age: 22 },
 ];
 
-const youngestPerson = minBy(people, (person) => person.age);
-const oldestPerson = maxBy(people, (person) => person.age);
+const youngestPerson = minBy(people, p => p.age);
+const oldestPerson = maxBy(people, p => p.age);
 
 console.log("Youngest person:", youngestPerson);
 console.log("Oldest person:", oldestPerson);
